@@ -31,7 +31,7 @@ async function main() {
     initSocketIO(server);
     // Start seeding in parallel after the server has started
     await Promise.all([
-      seedSuperAdmin(),
+      // seedSuperAdmin(),
       seedPrivacy(),
       seedTerms(),
       seedAbout(),

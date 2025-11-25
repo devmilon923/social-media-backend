@@ -121,10 +121,15 @@ const getMyFriends = catchAsync(async (req: Request, res: Response) => {
   if (!status?.trim()) {
     throw new ApiError(httpStatus.BAD_REQUEST, "status is required");
   }
-  let query = {
+  let query: any = {
     status: status,
-    $or: [{ followed_user_id: userId }, { following_user_id: userId }],
   };
+  if (status === "accepted") {
+    query.$or = [{ followed_user_id: userId }, { following_user_id: userId }];
+  }
+  if (status === "pending") {
+    query.following_user_id = userId;
+  }
   const friendsList = await Friends.find(query)
     .populate("following_user_id", "first_name last_name image")
     .populate("followed_user_id", "first_name last_name image")

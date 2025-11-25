@@ -97,12 +97,12 @@ const getFeed = catchAsync(async (req: Request, res: Response) => {
             target_type: "reply",
           });
           return {
-            id: reply._id,
-            text: reply.text,
-            user: `${reply?.user_id.first_name} ${reply?.user_id.last_name}`,
-            image: reply?.user_id.image || "",
+            id: reply?._id,
+            text: reply?.text,
+            user: `${reply?.user_id?.first_name} ${reply?.user_id?.last_name}`,
+            image: reply?.user_id?.image || "",
             reaction: count,
-            createdAt: reply.createdAt,
+            createdAt: reply?.createdAt,
             isReact: isRR?.reaction_type ? isRR?.reaction_type : null,
           };
         })
@@ -110,15 +110,15 @@ const getFeed = catchAsync(async (req: Request, res: Response) => {
 
       return {
         user: {
-          id: post.user_id._id,
-          name: `${post?.user_id.first_name} ${post?.user_id.last_name}`,
-          image: post?.user_id.image,
+          id: post?.user_id?._id,
+          name: `${post?.user_id?.first_name} ${post?.user_id?.last_name}`,
+          image: post?.user_id?.image,
         },
         post: {
-          id: post._id,
-          title: post.title,
-          image: post.image || null,
-          status: post.status,
+          id: post?._id,
+          title: post?.title,
+          image: post?.image || null,
+          status: post?.status,
           reaction_count: post?.reaction_count,
           comment_count: post?.comment_count + repliesCount,
           createdAt: post.createdAt,
@@ -126,12 +126,12 @@ const getFeed = catchAsync(async (req: Request, res: Response) => {
         },
         lastComment: comments
           ? {
-              id: comments._id,
+              id: comments?._id,
               text: comments.text,
-              user: `${comments?.user_id.first_name} ${comments?.user_id.last_name}`,
-              image: comments?.user_id.image || "",
+              user: `${comments?.user_id?.first_name} ${comments?.user_id?.last_name}`,
+              image: comments?.user_id?.image || "",
               reaction: CRcount,
-              createdAt: comments.createdAt,
+              createdAt: comments?.createdAt,
               isReact: isCR?.reaction_type ? isCR?.reaction_type : null,
             }
           : {},
@@ -285,9 +285,9 @@ const getReaction = catchAsync(async (req: Request, res: Response) => {
   const response = result.map((reaction: any) => {
     return {
       id: reaction?._id,
-      name: `${reaction.user_id.first_name} ${reaction.user_id.last_name}`,
+      name: `${reaction.user_id?.first_name} ${reaction?.user_id?.last_name}`,
       reaction: reaction?.reaction_type,
-      avatar: reaction?.user_id.image || "",
+      avatar: reaction?.user_id?.image || "",
     };
   });
 
