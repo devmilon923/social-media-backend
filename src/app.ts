@@ -16,7 +16,6 @@ app.use(
       "https://social-media-nine-phi.vercel.app",
       "http://localhost:3000",
     ],
-    credentials: true,
   })
 );
 app.use(express.static("public"));
