@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: [
-      "https://social-media-nine-phi.vercel.app",
+      "https://social-media-rho-sable.vercel.app",
       "http://localhost:3000",
     ],
   })
